@@ -9,6 +9,11 @@ function calculateTriangleArea(){
     const heightField=document.getElementById('triangle-height')
     const heightValueText=heightField.value
     const height=parseFloat(heightValueText)
+
+    if(isNaN(base) || isNaN(height)){
+        alert("Please enter number")
+        return
+    }
     
 
     const Area=0.5*base*height
@@ -39,19 +44,31 @@ function calculateRectangleArea(){
 }
 
 function calculateParallelogramArea(){
-     //    get parallelogram base value
-     const baseField=document.getElementById('parallelogram-base')
-     const baseValueText=baseField.value
-     const base=parseFloat(baseValueText)
+
+    const base=getInputValue('parallelogram-base')
+    const height=getInputValue('parallelogram-height')
      
- 
-     // get parallelogram height value
-     const heightField=document.getElementById('parallelogram-height')
-    const heightValueText=heightField.value
-    const height=parseFloat(heightValueText)
- 
-     const Area= base * height
-     // area
-     const spanArea= document.getElementById('parallelogram-area')
-     spanArea.innerText=Area
+    const Area= base * height
+    setElementInnerText('parallelogram-area',Area)
+}
+
+function calculateEllipseArea(){
+    const majorRadius=getInputValue('ellipse-major-radius')
+    const minorRadius=getInputValue('ellipse-minor-radius')
+    const AreaTwoDecimal=3.1416 * majorRadius * minorRadius
+    const Area=AreaTwoDecimal.toFixed(2)
+    setElementInnerText('ellipse-area',Area)
+}
+
+// reuseable function
+function getInputValue(fieldId){
+    const inputField=document.getElementById(fieldId)
+    const inputValueText=inputField.value
+    const value=parseFloat(inputValueText)
+    return value
+}
+
+function setElementInnerText(elementId,area){
+    const element=document.getElementById(elementId)
+    element.innerText=area
 }
